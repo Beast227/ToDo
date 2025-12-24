@@ -1,4 +1,8 @@
 package org.project.todo.user.dto;
 
-public class UserResponse {
+public record UserResponse(
+        String username,
+        String email,
+        String Id
+) {
 }
