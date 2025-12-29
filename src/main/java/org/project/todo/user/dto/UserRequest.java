@@ -46,4 +46,8 @@ public class UserRequest {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

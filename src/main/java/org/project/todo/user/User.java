@@ -1,17 +1,22 @@
 package org.project.todo.user;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.project.todo.user.dto.UserRequest;
 
 import java.util.UUID;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
+    @GeneratedValue
     private UUID id;
 
     @NotBlank
@@ -30,6 +35,12 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public User(UserRequest userRequest) {
+        this.username = userRequest.getUsername();
+        this.password = userRequest.getPassword();
+        this.email = userRequest.getEmail();
     }
 
     public UUID getId() {
