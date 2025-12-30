@@ -17,9 +17,9 @@ public class UserService {
     private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository, JwtUtil jwtUtil) {
+    public UserService(UserRepository userRepository, JwtUtil jwtUtil, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jwtUtil = jwtUtil;
     }
 
@@ -50,6 +50,23 @@ public class UserService {
 
     public UserResponse getUser(UUID id) {
         return userRepository.findById(id).map(UserResponse::new).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
+    public UserResponse updateUser(UUID id, UserRequest userRequest) {
+        User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        user.setEmail(userRequest.getEmail());
+        user.setUsername(userRequest.getUsername());
+
+        if (!bCryptPasswordEncoder.matches(userRequest.getPassword(), user.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(userRequest.getPassword()));
+        }
+
+        return new UserResponse(userRepository.save(user));
+    }
+
+    public void deleteUser(UUID id) {
+        userRepository.deleteById(id);
     }
 
 }

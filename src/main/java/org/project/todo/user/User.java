@@ -22,7 +22,7 @@ public class User {
     @NotBlank
     private String username;
 
-    @Size(min = 4, max = 50)
+    @Size(min = 4)
     private String password;
 
     @Email(message = "Invalid email go poop yourself")

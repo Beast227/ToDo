@@ -38,11 +38,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             if (id != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UUID userId = UUID.fromString(id);
-                UserResponse userResponse = userService.getUser(userId);
 
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userResponse, null, List.of());
+                UsernamePasswordAuthenticationToken Id = new UsernamePasswordAuthenticationToken(userId, null, List.of());
 
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+                SecurityContextHolder.getContext().setAuthentication(Id);
             }
 
         }
