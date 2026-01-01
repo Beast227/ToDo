@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "todo_categories")
-class ToDoCategory{
+public class ToDoCategory{
 
     @Version
     private Long version;
@@ -42,6 +42,11 @@ class ToDoCategory{
     }
 
     protected ToDoCategory() {}
+
+    public ToDoCategory(String category, User user) {
+        this.category = category;
+        this.user = user;
+    }
 
     public Long getId() {
          return id;

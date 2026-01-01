@@ -52,6 +52,10 @@ public class UserService {
         return userRepository.findById(id).map(UserResponse::new).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
+    public User getUserObject(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
     public UserResponse updateUser(UUID id, UserRequest userRequest) {
         User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
 
