@@ -56,6 +56,10 @@ public class ToDoCategory{
         return category;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public User getUser() {
         return user;
     }
