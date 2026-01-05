@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.project.todo.user.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class ToDoCategory{
     private User user;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL,  orphanRemoval = true)
-    private List<ToDoItem> items;
+    private List<ToDoItem> items = new ArrayList<>();
 
     private LocalDateTime updatedAt;
 
@@ -80,10 +81,12 @@ public class ToDoCategory{
 
     public void addItem(ToDoItem item) {
         items.add(item);
+        item.setCategory(this);
     }
 
     public void removeItem(ToDoItem item) {
         items.remove(item);
+        item.setCategory(null);
     }
 
 }

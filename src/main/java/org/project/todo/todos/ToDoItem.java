@@ -1,6 +1,8 @@
 package org.project.todo.todos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.project.todo.todos.dto.ToDoItemRequest;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -54,6 +56,10 @@ public class ToDoItem {
         return dueDate;
     }
 
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -66,8 +72,27 @@ public class ToDoItem {
         return category;
     }
 
+    public void setCategory(ToDoCategory category) {
+        this.category = category;
+    }
+
     public Boolean getCompleted() {
         return completed;
+    }
+
+    public void updateFrom(ToDoItemRequest toDoItemRequest) {
+        if (this.dueDate != toDoItemRequest.dueDate() && toDoItemRequest.dueDate() != null) {
+            this.dueDate = toDoItemRequest.dueDate();
+        }
+        if (this.title != toDoItemRequest.title() && toDoItemRequest.title() != null) {
+            this.title = toDoItemRequest.title();
+        }
+        if (this.steps != toDoItemRequest.steps() && toDoItemRequest.steps() != null) {
+            this.steps = toDoItemRequest.steps();
+        }
+        if (this.completed != toDoItemRequest.completed() && toDoItemRequest.completed() != null) {
+            this.completed = toDoItemRequest.completed();
+        }
     }
 
 }
