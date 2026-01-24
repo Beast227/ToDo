@@ -1,12 +1,10 @@
 package org.project.todo.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.project.todo.user.dto.UserRequest;
 
 import java.util.UUID;
@@ -27,6 +25,7 @@ public class User {
 
     @Email(message = "Invalid email go poop yourself")
     @NotBlank
+    @Column(nullable = false, unique = true)
     private String email;
 
     protected User() {}

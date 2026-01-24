@@ -22,7 +22,7 @@ public record ToDoCategoryResponse(
     public ToDoCategoryResponse(ToDoCategory toDoCategory) {
         this(
                 toDoCategory.getCategory(),
-                toDoCategory.getId().toString(),
+                toDoCategory.getUser().getId().toString(),
                 toDoCategory.getId().toString()
         );
     }

@@ -47,8 +47,9 @@ public class ToDoController {
 
     @PostMapping("/item")
     public ToDoItemResponse createToDoItem(@RequestBody @Valid ToDoItemRequest toDoItemRequest, @RequestParam Long id) {
+        System.out.println("This shi is working");
         UUID userId = (UUID) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+        System.out.println("This shi is working");
         return toDoService.createToDoItem(toDoItemRequest, id, userId);
     }
 
