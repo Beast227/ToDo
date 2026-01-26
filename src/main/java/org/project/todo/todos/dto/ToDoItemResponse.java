@@ -9,26 +9,32 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record ToDoItemResponse(
+        Long id,
         LocalDateTime dueDate,
         @NotBlank String title,
         List<String> steps,
-        @NotBlank String category
+        @NotBlank String category,
+        Boolean completed
 ) {
     public ToDoItemResponse(ToDoItem toDoItem, ToDoCategory toDoCategory) {
         this(
+                toDoItem.getId(),
                 toDoItem.getDueDate(),
                 toDoItem.getTitle(),
                 toDoItem.getSteps(),
-                toDoCategory.getCategory()
+                toDoCategory.getCategory(),
+                toDoItem.getCompleted()
         );
     }
 
     public ToDoItemResponse(ToDoItem toDoItem) {
         this(
+                toDoItem.getId(),
                 toDoItem.getDueDate(),
                 toDoItem.getTitle(),
                 null,
-                null
+                null,
+                toDoItem.getCompleted()
         );
     }
 }
