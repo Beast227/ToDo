@@ -67,6 +67,7 @@ public class ToDoService {
         );
 
         toDoCategory.addItem(toDoItem);
+        toDoItemRepository.save(toDoItem);
 
         return new ToDoItemResponse(toDoItem, toDoCategory);
     }
