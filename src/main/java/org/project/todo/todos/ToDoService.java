@@ -29,6 +29,12 @@ public class ToDoService {
         User user = userService.getUserObject(id);
         ToDoCategory toDoCategory = new ToDoCategory(toDoCategoryRequest.category(), user);
 
+        ToDoCategory myday = toDoCategoryRepository.findToDoCategoriesByCategory("My Day");
+        if (myday == null) {
+            myday = new ToDoCategory("My Day", user);
+            toDoCategoryRepository.save(myday);
+        }
+
         toDoCategoryRepository.save(toDoCategory);
 
         return new ToDoCategoryResponse(toDoCategory, user);

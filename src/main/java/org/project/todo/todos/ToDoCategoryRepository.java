@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface ToDoCategoryRepository extends JpaRepository<ToDoCategory, Long> {
     List<ToDoCategory> findByUser_Id(UUID userId);
+    ToDoCategory findToDoCategoriesByCategory(String category);
 }
