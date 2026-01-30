@@ -11,4 +11,5 @@ import java.util.UUID;
 public interface ToDoCategoryRepository extends JpaRepository<ToDoCategory, Long> {
     List<ToDoCategory> findByUser_Id(UUID userId);
     ToDoCategory findToDoCategoriesByCategory(String category);
+    void deleteByUser_Id(UUID userId);
 }

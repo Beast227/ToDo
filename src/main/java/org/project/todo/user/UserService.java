@@ -2,6 +2,7 @@ package org.project.todo.user;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.project.todo.config.JwtUtil;
+import org.project.todo.todos.ToDoCategoryRepository;
 import org.project.todo.user.dto.UserLogin;
 import org.project.todo.user.dto.UserRequest;
 import org.project.todo.user.dto.UserResponse;
@@ -14,13 +15,15 @@ import java.util.UUID;
 public class UserService {
 
     private final JwtUtil jwtUtil;
+    private final ToDoCategoryRepository toDoCategoryRepository;
     private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository, JwtUtil jwtUtil, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository, JwtUtil jwtUtil, BCryptPasswordEncoder bCryptPasswordEncoder, ToDoCategoryRepository toDoCategoryRepository) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jwtUtil = jwtUtil;
+        this.toDoCategoryRepository = toDoCategoryRepository;
     }
 
     public UserResponse createUser(UserRequest userRequest) {
@@ -70,6 +73,9 @@ public class UserService {
     }
 
     public void deleteUser(UUID id) {
+
+        toDoCategoryRepository.deleteByUser_Id(id);
+
         userRepository.deleteById(id);
     }
 

@@ -28,6 +28,7 @@ public class UserRequest {
     private String email;
 
     @Size(min = 4)
+    @NotBlank
     private String password;
 
     public UserRequest(String username, String email, String password) {
