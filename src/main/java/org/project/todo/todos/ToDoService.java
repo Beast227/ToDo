@@ -1,10 +1,7 @@
 package org.project.todo.todos;
 
 import jakarta.transaction.Transactional;
-import org.project.todo.todos.dto.ToDoCategoryRequest;
-import org.project.todo.todos.dto.ToDoCategoryResponse;
-import org.project.todo.todos.dto.ToDoItemRequest;
-import org.project.todo.todos.dto.ToDoItemResponse;
+import org.project.todo.todos.dto.*;
 import org.project.todo.user.User;
 import org.project.todo.user.UserService;
 import org.springframework.stereotype.Service;
@@ -130,5 +127,13 @@ public class ToDoService {
         return toDoCategory.getItems().stream().map(item -> new ToDoItemResponse(item, toDoCategory)).toList();
     }
 
+    public Response toggleCompleted(Long ItemId, Boolean completed) {
+        ToDoItem toDoItem = toDoItemRepository.findById(ItemId).get();
 
+        toDoItem.setCompleted(completed);
+        
+        toDoItemRepository.save(toDoItem);
+
+        return new Response("Toggle completed for todo item worked");
+    }
 }

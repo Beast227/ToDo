@@ -80,6 +80,10 @@ public class ToDoItem {
         return completed;
     }
 
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+
     public void updateFrom(ToDoItemRequest toDoItemRequest) {
         if (this.dueDate != toDoItemRequest.dueDate() && toDoItemRequest.dueDate() != null) {
             this.dueDate = toDoItemRequest.dueDate();

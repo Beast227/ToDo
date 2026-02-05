@@ -1,10 +1,7 @@
 package org.project.todo.todos;
 
 import jakarta.validation.Valid;
-import org.project.todo.todos.dto.ToDoCategoryRequest;
-import org.project.todo.todos.dto.ToDoCategoryResponse;
-import org.project.todo.todos.dto.ToDoItemRequest;
-import org.project.todo.todos.dto.ToDoItemResponse;
+import org.project.todo.todos.dto.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,6 +71,11 @@ public class ToDoController {
     public List<ToDoItemResponse> getToDoItems(@RequestParam Long CatId) {
         UUID userId = (UUID) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return toDoService.getToDoItems(CatId, userId);
+    }
+
+    @PutMapping("/item/completed")
+    public Response toggleCompleted(@RequestParam Long ItemId, @RequestParam Boolean completed) {
+        return toDoService.toggleCompleted(ItemId, completed);
     }
 
 }
